@@ -19,6 +19,7 @@ public class DrawActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView ivColorPicker;
     private RadioGroup rgPenSize;
     private ImageView ivSave;
+    private DrawingView drawingView;
 
     private int currentColor;
     private int currentPenSize;
@@ -31,6 +32,8 @@ public class DrawActivity extends AppCompatActivity implements View.OnClickListe
         ivColorPicker = findViewById(R.id.iv_color_picker);
         rgPenSize = findViewById(R.id.rg_pen_size);
         ivSave = findViewById(R.id.iv_save);
+
+        drawingView = findViewById(R.id.drawing_view);
 
         ivColorPicker.setOnClickListener(this);
         ivSave.setOnClickListener(this);
@@ -55,11 +58,15 @@ public class DrawActivity extends AppCompatActivity implements View.OnClickListe
                         currentPenSize = 15;
                         break;
                 }
+                drawingView.setCurrentSize(currentPenSize);
                 Toast.makeText(DrawActivity.this,
                         "pen size: " + currentPenSize,
                         Toast.LENGTH_SHORT).show();
             }
         });
+
+        drawingView.setCurrentColor(currentColor);
+        drawingView.setCurrentSize(currentPenSize);
     }
 
     @Override
@@ -90,6 +97,7 @@ public class DrawActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onClick(DialogInterface dialog, int selectedColor, Integer[] allColors) {
                         currentColor = selectedColor;
+                        drawingView.setCurrentColor(currentColor);
                         ivColorPicker.setColorFilter(currentColor);
                     }
                 })
