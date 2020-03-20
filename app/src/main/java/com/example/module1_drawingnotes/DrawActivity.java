@@ -1,6 +1,7 @@
 package com.example.module1_drawingnotes;
 
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -76,8 +77,22 @@ public class DrawActivity extends AppCompatActivity implements View.OnClickListe
                 showColorPickerDialog();
                 break;
             case R.id.iv_save:
+                saveImage();
                 break;
         }
+    }
+
+    private void saveImage() {
+        //1. get bitmap
+        drawingView.setDrawingCacheEnabled(true);
+        drawingView.buildDrawingCache();
+        Bitmap bitmap = drawingView.getDrawingCache();
+
+        //2. save image
+        ImageUtils.saveImage(bitmap, DrawActivity.this);
+
+        //3. close activity
+        finish();
     }
 
     private void showColorPickerDialog() {
