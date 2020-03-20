@@ -1,5 +1,6 @@
 package com.example.module1_drawingnotes;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ public class DrawActivity extends AppCompatActivity implements View.OnClickListe
 
     private int currentColor;
     private int currentPenSize;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,7 @@ public class DrawActivity extends AppCompatActivity implements View.OnClickListe
         ivSave = findViewById(R.id.iv_save);
 
         drawingView = findViewById(R.id.drawing_view);
-
+        progressDialog = new ProgressDialog(this);
         ivColorPicker.setOnClickListener(this);
         ivSave.setOnClickListener(this);
 
@@ -83,6 +85,11 @@ public class DrawActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void saveImage() {
+        //0. show progress dialog
+
+        progressDialog.setMessage("Saving...");
+        progressDialog.show();
+
         //1. get bitmap
         drawingView.setDrawingCacheEnabled(true);
         drawingView.buildDrawingCache();
@@ -93,6 +100,12 @@ public class DrawActivity extends AppCompatActivity implements View.OnClickListe
 
         //3. close activity
         finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        progressDialog.dismiss();
     }
 
     private void showColorPickerDialog() {

@@ -7,6 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <GridView
+        android:id="@+id/gv_images"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="3"
+        android:padding="@dimen/space_large"/>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fb_add"
         android:layout_width="wrap_content"

@@ -11,7 +11,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 
 public class ImageUtils {
     private static final String TAG = "ImageUtils";
@@ -27,10 +30,11 @@ public class ImageUtils {
         folder.mkdir();
 
         //2. create empty file (.png)
-        String imageName = Calendar.getInstance().getTime().toString() + ".png";
+        String imageName = Calendar.getInstance().getTimeInMillis() + ".png";
         Log.d(TAG, "saveImage: imageName " + imageName);
 
-        File imageFile = new File(folder, imageName);
+        File imageFile = new File(folder.toString(), imageName);
+        Log.d(TAG, "saveImage: " + imageFile.getAbsolutePath());
 
         //3. save image
         try {
@@ -51,5 +55,14 @@ public class ImageUtils {
         } catch (IOException e) {
             Log.d(TAG, "saveImage: IOException");
         }
+    }
+
+    public static List<File> getListImage() {
+        List<File> images = new ArrayList<>();
+        File folder = new File(Environment.getExternalStorageDirectory().toString(), folderName);
+        if (folder.listFiles() != null) {
+            images = Arrays.asList(folder.listFiles());
+        }
+        return images;
     }
 }

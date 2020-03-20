@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.GridView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -17,6 +18,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class MainActivity extends AppCompatActivity {
 
     int requestCodeWriteStorage = 1001;
+
+    private GridView gridView;
+    private ImageAdapter imageAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
         setupPermission();
+
+        gridView = findViewById(R.id.gv_images);
+        imageAdapter = new ImageAdapter();
+        gridView.setAdapter(imageAdapter);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        imageAdapter.notifyDataSetChanged();
     }
 
     private void setupPermission() {
