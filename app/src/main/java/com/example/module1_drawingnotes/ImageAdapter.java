@@ -37,8 +37,7 @@ public class ImageAdapter extends BaseAdapter {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
         float ratio = (float) width / height;
-        ivImage.setImageBitmap(Bitmap.createScaledBitmap(bitmap, 100, (int) (100 * height / ratio), false));
-        ivImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        ivImage.setImageBitmap(Bitmap.createScaledBitmap(bitmap, 100, (int) (100 / ratio), false));
 
         tvImage.setText(ImageUtils.getListImage().get(position).getName());
         return convertView;

@@ -106,6 +106,7 @@ public class DrawActivity extends AppCompatActivity implements View.OnClickListe
     protected void onDestroy() {
         super.onDestroy();
         progressDialog.dismiss();
+        Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
     }
 
     private void showColorPickerDialog() {

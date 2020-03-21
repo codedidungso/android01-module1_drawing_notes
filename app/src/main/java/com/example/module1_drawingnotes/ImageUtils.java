@@ -42,8 +42,6 @@ public class ImageUtils {
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
             fileOutputStream.close();
 
-            Toast.makeText(context, "Saved!", Toast.LENGTH_SHORT).show();
-
             //4. scan to make image appear immediately in gallery
             MediaScannerConnection.scanFile(context,
                     new String[]{imageFile.getAbsolutePath()},
