@@ -63,4 +63,10 @@ public class ImageUtils {
         }
         return images;
     }
+
+    public static boolean deleteImage(int position) {
+        File file = new File(Environment.getExternalStorageDirectory() + "/" + folderName,
+                getListImage().get(position).getName());
+        return file.delete();
+    }
 }
